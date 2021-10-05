@@ -10,11 +10,11 @@ from keras.layers.core import Reshape, Dense, Dropout, Flatten
 from keras.layers.advanced_activations import LeakyReLU
 from keras.layers.convolutional import Conv2D, UpSampling2D
 from keras.datasets import mnist
-from keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam
 from keras import backend as K
 from keras import initializers
 
-K.set_image_dim_ordering('th')
+# K.set_image_dim_ordering('th')
 
 # Deterministic output.
 # Tired of seeing the same results every time? Remove the line below.
@@ -97,13 +97,13 @@ def saveModels(epoch):
 
 def train(epochs=1, batchSize=128):
     batchCount = X_train.shape[0] / batchSize
-    print 'Epochs:', epochs
-    print 'Batch size:', batchSize
-    print 'Batches per epoch:', batchCount
+    print('Epochs:', epochs)
+    print('Batch size:', batchSize)
+    print('Batches per epoch:', batchCount)
 
-    for e in xrange(1, epochs+1):
-        print '-'*15, 'Epoch %d' % e, '-'*15
-        for _ in tqdm(xrange(batchCount)):
+    for e in range(1, epochs+1):
+        print ('-'*15, 'Epoch %d' % e, '-'*15)
+        for _ in tqdm(range(batchCount)):
             # Get a random set of input noise and images
             noise = np.random.normal(0, 1, size=[batchSize, randomDim])
             imageBatch = X_train[np.random.randint(0, X_train.shape[0], size=batchSize)]
@@ -133,11 +133,11 @@ def train(epochs=1, batchSize=128):
 
         if e == 1 or e % 5 == 0:
             plotGeneratedImages(e)
-            saveModels(e)
+            # saveModels(e)
 
     # Plot losses from every epoch
     plotLoss(e)
 
 if __name__ == '__main__':
-    train(50, 128)
+    train(5, 128)
 
